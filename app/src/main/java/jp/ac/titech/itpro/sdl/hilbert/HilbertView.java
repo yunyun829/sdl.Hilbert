@@ -9,13 +9,13 @@ import android.view.View;
 
 public class HilbertView extends View {
 
-    private Paint paint = new Paint();
+    private final Paint paint = new Paint();
 
     private Canvas canvas;
 
     private int order = 1;
 
-    private HilbertTurtle turtle = new HilbertTurtle(new Turtle.Drawer() {
+    private final HilbertTurtle turtle = new HilbertTurtle(new Turtle.Drawer() {
         @Override
         public void drawLine(double x0, double y0, double x1, double y1) {
             canvas.drawLine((float) x0, (float) y0, (float) x1, (float) y1, paint);
