@@ -1,8 +1,10 @@
 package jp.ac.titech.itpro.sdl.hilbert;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private final static int MAX_ORDER = 9;
+    private final static String KEY_NAME = "MainActivity.order";
     private int order = 1;
 
     private TextView orderView;
@@ -20,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState != null){
+            order = savedInstanceState.getInt(KEY_NAME);
+        }
         setContentView(R.layout.activity_main);
 
         orderView = findViewById(R.id.order_view);
@@ -50,6 +56,14 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         display();
     }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_NAME,order);
+    }
+
 
     private void display() {
         orderView.setText(getString(R.string.order_view_format, order));
